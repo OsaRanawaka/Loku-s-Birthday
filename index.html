@@ -3,167 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Loku Akka! 🌟</title>
+    <title>Birthday Magic for Loku Akka 💖</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root { --p: #ff0055; --s: #00e5ff; --gold: #ffd700; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background: #050505;
+            background: #0a0a0a;
             height: 100vh; width: 100vw;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; font-family: 'Montserrat', sans-serif;
+            display: grid; place-items: center; /* Perfect Centering */
+            overflow: hidden; font-family: 'Poppins', sans-serif;
+            perspective: 1000px;
         }
 
-        /* Animated Nebula Background */
-        .nebula {
+        /* Animated Background Waves */
+        .bg-gradient {
             position: absolute; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a0033 0%, #050505 100%);
+            background: linear-gradient(-45deg, #0a0a0a, #1a0033, #0d0221, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             z-index: 1;
         }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        .stars { position: absolute; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+        .container { position: relative; z-index: 10; text-align: center; width: 90%; max-width: 480px; }
 
-        .container {
-            position: relative; z-index: 10;
-            text-align: center; width: 90%; max-width: 450px;
-        }
-
-        /* Pro Glass Card */
-        .card {
-            background: rgba(255, 255, 255, 0.03);
+        /* Modern Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 40px;
-            padding: 40px 25px;
-            box-shadow: 0 0 40px rgba(0, 217, 232, 0.1);
+            padding: 50px 30px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            transform-style: preserve-3d;
             display: none;
-            animation: cardIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: cardReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
-        @keyframes cardIn { from { opacity: 0; transform: translateY(50px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes cardReveal { from { opacity: 0; transform: rotateY(-30deg) translateZ(-100px); } to { opacity: 1; transform: rotateY(0) translateZ(0); } }
 
-        /* 3D Animated Cake */
-        .cake-3d {
-            margin: 0 auto 25px;
-            position: relative; width: 120px;
-            animation: cakeFloat 4s ease-in-out infinite;
-        }
+        /* Premium Floating Cake */
+        .cake-wrapper { margin-bottom: 30px; animation: floating 3s ease-in-out infinite; }
+        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        @keyframes cakeFloat {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-
-        .cake-svg { filter: drop-shadow(0 0 15px #05d9e8); }
+        .cake-svg { width: 130px; filter: drop-shadow(0 0 20px var(--p)); }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem; margin-bottom: 15px;
-            color: #fff;
-            text-shadow: 0 0 10px #ff2a6d, 0 0 20px #ff2a6d, 0 0 40px #ff2a6d;
-            animation: neonPulse 1.5s ease-in-out infinite alternate;
+            font-size: 3.2rem; margin-bottom: 20px;
+            background: linear-gradient(to right, var(--p), #ff71ce, var(--s));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 20px rgba(255, 0, 85, 0.3);
         }
 
-        @keyframes neonPulse { from { opacity: 0.8; } to { opacity: 1; text-shadow: 0 0 20px #ff2a6d, 0 0 50px #ff2a6d; } }
+        #wish-box { font-size: 1rem; color: #e0e0e0; line-height: 1.8; margin-bottom: 25px; min-height: 100px; }
+        .signature { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: var(--s); opacity: 0; transition: 2s; }
 
-        #msg { font-size: 1rem; color: #ccc; line-height: 1.7; min-height: 100px; }
-
-        .sig { font-family: 'Dancing Script', cursive; font-size: 2rem; color: #05d9e8; opacity: 0; margin-top: 15px; transition: 2s; }
-
-        .btn-start {
-            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
-            border: none; padding: 22px 55px; border-radius: 100px;
-            color: #fff; font-size: 1.1rem; font-weight: bold;
-            cursor: pointer; letter-spacing: 2px;
-            box-shadow: 0 0 30px rgba(255, 42, 109, 0.5);
-            transition: 0.4s;
+        .btn-launch {
+            background: linear-gradient(45deg, var(--p), #7b1fa2);
+            border: none; padding: 25px 60px; border-radius: 100px;
+            color: #fff; font-size: 1.2rem; font-weight: bold;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 3px;
+            box-shadow: 0 0 40px rgba(255, 0, 85, 0.5);
+            transition: 0.5s;
         }
-        .btn-start:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(5, 217, 232, 0.6); }
+        .btn-launch:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 0 60px var(--p); }
 
-        .star {
-            position: absolute; background: white; border-radius: 50%;
-            opacity: 0.5; animation: twinkle 2s infinite;
-        }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .item { position: absolute; pointer-events: none; opacity: 0.3; animation: up 10s linear infinite; }
+        @keyframes up { 0% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.4; } 90% { opacity: 0.4; } 100% { transform: translateY(-20vh); opacity: 0; } }
     </style>
 </head>
 <body>
 
-<div class="nebula"></div>
-<div class="stars" id="starField"></div>
+<div class="bg-gradient"></div>
+<div id="floaters"></div>
 
 <div class="container">
-    <div id="start">
-        <button class="btn-start" id="go">🎁 SEE THE MAGIC 🎁</button>
+    <div id="start-view">
+        <button class="btn-launch" id="btn-play">🎁 Open Surprise 🎁</button>
     </div>
 
-    <div id="main" class="card">
-        <div class="cake-3d">
+    <div id="main-view" class="glass-card">
+        <div class="cake-wrapper">
             <svg class="cake-svg" viewBox="0 0 100 100">
-                <rect x="20" y="65" width="60" height="20" rx="5" fill="#ff2a6d"/>
-                <rect x="28" y="50" width="44" height="15" rx="5" fill="#ff71ce"/>
-                <rect x="35" y="38" width="30" height="12" rx="5" fill="#05d9e8"/>
-                <circle cx="50" cy="22" r="2" fill="#fff"/>
-                <path d="M50 5 Q54 14 50 20 Q46 14 50 5" fill="#ffd700">
-                    <animate attributeName="opacity" values="1;0.5;1" dur="0.5s" repeatCount="indefinite"/>
+                <rect x="20" y="70" width="60" height="20" rx="5" fill="#d81b60"/>
+                <rect x="25" y="52" width="50" height="18" rx="5" fill="#f06292"/>
+                <rect x="32" y="38" width="36" height="14" rx="5" fill="#4dd0e1"/>
+                <path d="M20 70 q5 10 10 0 t10 0 t10 0 t10 0 t10 0 t10 0" fill="#f06292"/>
+                <rect x="48" y="20" width="4" height="18" fill="#fff" rx="2"/>
+                <path d="M50 2 Q56 12 50 20 Q44 12 50 2" fill="#ffd700">
+                    <animate attributeName="opacity" values="1;0.5;1" dur="0.6s" repeatCount="indefinite"/>
                 </path>
             </svg>
         </div>
         <h1>Happy Birthday Akka!</h1>
-        <div id="msg"></div>
-        <div class="sig" id="sig">- Your Thambi -</div>
+        <div id="wish-box"></div>
+        <div id="sig-text" class="signature">- Your Thambi -</div>
     </div>
 </div>
 
-<audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
-<audio id="pop"><source src="pop.mp3" type="audio/mpeg"></audio>
+<audio id="audioSong" loop><source src="song.mp3" type="audio/mpeg"></audio>
+<audio id="audioPop"><source src="pop.mp3" type="audio/mpeg"></audio>
 
 <script>
-    // Create random stars
-    const sf = document.getElementById('starField');
-    for(let i=0; i<80; i++) {
-        let s = document.createElement('div');
-        s.className = 'star';
-        let size = Math.random() * 3 + 'px';
-        s.style.width = size; s.style.height = size;
+    // Create random floating items
+    const fl = document.getElementById('floaters');
+    const icons = ['💖', '🎈', '⭐', '✨'];
+    for(let i=0; i<30; i++) {
+        let s = document.createElement('span');
+        s.className = 'item';
+        s.innerHTML = icons[Math.floor(Math.random()*icons.length)];
         s.style.left = Math.random() * 100 + 'vw';
-        s.style.top = Math.random() * 100 + 'vh';
-        s.style.animationDelay = Math.random() * 5 + 's';
-        sf.appendChild(s);
+        s.style.animationDelay = Math.random() * 10 + 's';
+        s.style.fontSize = Math.random() * 20 + 10 + 'px';
+        fl.appendChild(s);
     }
 
-    const wish = "To my amazing Loku Akka,\n\nWishing you a truly wonderful birthday filled with immense happiness and vibrant health. 🌟\n\nMay all your future plans 🚀 be crowned with spectacular success, and every goal 🎓 you pursue be met with brilliant fruition.\n\nKeep soaring and making us proud!";
+    const wishText = "To my amazing Loku Akka,\n\nWishing you a truly wonderful birthday filled with immense happiness and vibrant health. 🌟\n\nMay all your future plans 🚀 be crowned with spectacular success, and every goal 🎓 you pursue be met with brilliant fruition.\n\nKeep soaring and making us proud!";
 
-    document.getElementById('go').addEventListener('click', function() {
-        document.getElementById('music').play().catch(e => console.log(e));
-        document.getElementById('pop').play().catch(e => console.log(e));
+    document.getElementById('btn-play').addEventListener('click', function() {
+        document.getElementById('audioSong').play();
+        document.getElementById('audioPop').play();
         
-        document.getElementById('start').style.display = 'none';
-        document.getElementById('main').style.display = 'block';
+        document.getElementById('start-view').style.display = 'none';
+        document.getElementById('main-view').style.display = 'block';
 
-        // Pro Confetti
-        var end = Date.now() + (10 * 1000);
+        // Master Confetti Burst
+        var end = Date.now() + (8 * 1000);
         (function frame() {
-            confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff2a6d', '#05d9e8'] });
-            confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff2a6d', '#05d9e8'] });
+            confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff0055', '#00e5ff', '#ffd700'] });
+            confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff0055', '#00e5ff', '#ffd700'] });
             if (Date.now() < end) requestAnimationFrame(frame);
         }());
 
-        // Typewriter
+        // Typewriter Effect
         let i = 0;
-        const el = document.getElementById('msg');
+        const target = document.getElementById('wish-box');
         function type() {
-            if (i < wish.length) {
-                el.innerHTML += wish.charAt(i) === '\n' ? '<br>' : wish.charAt(i);
+            if (i < wishText.length) {
+                target.innerHTML += wishText.charAt(i) === '\n' ? '<br>' : wishText.charAt(i);
                 i++;
                 setTimeout(type, 45);
             } else {
-                document.getElementById('sig').style.opacity = '1';
-                document.getElementById('sig').style.transform = 'translateY(-5px)';
+                document.getElementById('sig-text').style.opacity = '1';
+                document.getElementById('sig-text').style.transform = 'translateY(-10px)';
             }
         }
-        setTimeout(type, 1200);
+        setTimeout(type, 1500);
     });
 </script>
 </body>
